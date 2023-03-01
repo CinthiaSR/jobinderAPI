@@ -1,13 +1,13 @@
 
 // import PostService from '../../'
-import PostService from '../models/post.model'
+import Post from '../models/post.model'
 import CommentService from '../models/comment.model'
 import User from '../models/user.model'
 export class PostController {
   
   getAllPosts = async (request, response, next) => {
     try {
-      const lastPosts = await PostService.find({}).populate(User).populate(CommentService)
+      const lastPosts = await Post.find({}).populate(User).populate(CommentService)
       response.status(200).send(lastPosts)
     } catch (error) {
       console.error(error)
@@ -18,12 +18,11 @@ export class PostController {
   createPost = async (request, response, next) => {
     try {
       // create and save new post
-      const { tittle, content, likes, comments, tags, author } = await PostService.create(request.body)
-      const newPost = new PostService({
-        tittle,
+      const { title, content, likes, tags, author } = request.body
+      const newPost = new Post({
+        title,
         content,
         likes,
-        comments,
         tags,
         author  
       })
@@ -42,7 +41,7 @@ export class PostController {
   getPost = async (request, response, next) => {
     try {
       const { id } = request.params
-      const post = await PostService.findById(id).populate(User).populate(CommentService)
+      const post = await Post.findById(id).populate('author', "comments")
 
       if (!post) {
         return response.status(404).send({ message: 'Post not found' })
@@ -58,8 +57,9 @@ export class PostController {
   updatePost = async (request, response, next) => {
     try {
       const { id } = request.params
-      const { tittle, content, likes, comments } = request.body
-      const post = await PostService.findByIdAndUpdate(id, { tittle, content, likes, comments }, { new: true })
+      const bodyParams = { ...request.body }
+      const post = await Post.findByIdAndUpdate(id, bodyParams, 
+        { new: true })
 
       if (!post) {
         return response.status(404).send({ message: 'Post not found' })
@@ -75,7 +75,7 @@ export class PostController {
   deletePost = async (request, response, next) => {
     try {
       const { id } = request.params
-      const post = await PostService.findByIdAndDelete(id)
+      const post = await Post.findByIdAndDelete(id)
 
       if (!post) {
         return response.status(404).send({ message: 'Post not found' })
