@@ -5,6 +5,7 @@ import * as http from 'http';
 import * as os from 'os';
 import logger from '../api/middlewares/logger';
 import errorHandler from '../api/middlewares/error.handler';
+import corsMiddleware from '../api/middlewares/cors'
 
 const app = new Express();
 
@@ -23,7 +24,7 @@ export default class ExpressServer {
 
   router(routes) {
     routes(app)
-    app.use(errorHandler)
+    app.use(errorHandler, corsMiddleware)
     return this
   }
 
