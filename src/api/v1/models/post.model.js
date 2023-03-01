@@ -7,9 +7,12 @@ const postSchema = new mongoose.Schema({
   content: {
     type: String
   },
-  likes:{
-    type:Number
+  imageURL: {
+    type: String
   },
+  // likes:{
+  //   type:Number
+  // },
   comments: [
     {
     type: mongoose.Schema.Types.ObjectId,
