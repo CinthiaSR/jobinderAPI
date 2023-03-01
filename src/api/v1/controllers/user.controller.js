@@ -4,7 +4,7 @@ import User from '../models/user.model'
 export class UserController {
   getAllUsers=async(request, response, next)=>{
     try {
-      const users = await User.find({}).populate('post')  
+      const users = await User.find({}).populate('posts')  
       response.status(200).send(users)
     } catch(error) {
       next(error)
