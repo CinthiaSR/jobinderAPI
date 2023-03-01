@@ -7,7 +7,7 @@ export class PostController {
   
   getAllPosts = async (request, response, next) => {
     try {
-      const lastPosts = await Post.find({}).populate('Comments').populate('author')
+      const lastPosts = await Post.find({}).populate('author')
       response.status(200).send(lastPosts)
     } catch (error) {
       console.error(error)
