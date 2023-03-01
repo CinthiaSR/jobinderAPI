@@ -18,12 +18,12 @@ export class PostController {
   createPost = async (request, response, next) => {
     try {
       // create and save new post
-      const { title, content, imageURL, tags, author } = request.body
+      const { title, content, imageURL,author } = request.body
       const newPost = new Post({
         title,
         content,
         imageURL,
-        tags,
+        // tags,
         author  
       })
       await newPost.save()

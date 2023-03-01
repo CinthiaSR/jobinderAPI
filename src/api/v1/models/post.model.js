@@ -19,9 +19,9 @@ const postSchema = new mongoose.Schema({
     ref: 'Comments'
     }
   ],
-  tags:{
-    type: String
-  },
+  // tags:{
+  //   type: String
+  // },
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
