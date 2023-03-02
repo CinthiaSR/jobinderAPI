@@ -17,13 +17,13 @@ export class CommentController {
 
   getComment= async(request, response, next)=> {
     try {
-      const {idPost}=request.params
-      const existPost=await Post.findById(idPost)
-      if(!existPost){
-        response.status(404).send({
-          error:'No se encontro ningun registro en la base de datos'
-        })
-      }
+      // const {idPost}=request.params
+      // const existPost=await Post.findById(idPost)
+      // if(!existPost){
+      //   response.status(404).send({
+      //     error:'No se encontro ningun registro en la base de datos'
+      //   })
+      // }
 
       const { id } = request.params // se obtiene de la url de la peticion
       const commentNew = await Comment.findById(id).populate('author')
@@ -41,13 +41,13 @@ export class CommentController {
 
   createComment= async(request, response, next)=> {
     try {
-      const {idPost}=request.params
-      const existPost=await Post.findById(idPost)
-      if(!existPost){
-        response.status(404).send({
-          error:'No se encontro ningun registro en la base de datos'
-        })
-      }
+      // const {idPost}=request.params
+      // const existPost=await Post.findById(idPost)
+      // if(!existPost){
+      //   response.status(404).send({
+      //     error:'No se encontro ningun registro en la base de datos'
+      //   })
+      // }
       const { content,posts, author } = request.body
       const newComment = new Comment({
         content,
@@ -67,13 +67,13 @@ export class CommentController {
 
   updateComment= async(request, response, next)=> {
     try {
-      const {idPost}=request.params
-      const existPost=await Post.findById(idPost)
-      if(!existPost){
-        response.status(404).send({
-          error:'No se encontro ningun registro en la base de datos'
-        })
-      }   
+      // const {idPost}=request.params
+      // const existPost=await Post.findById(idPost)
+      // if(!existPost){
+      //   response.status(404).send({
+      //     error:'No se encontro ningun registro en la base de datos'
+      //   })
+      // }   
       const { id } = request.params
       const bodyParams = { ...request.body }
   
@@ -88,13 +88,13 @@ export class CommentController {
 
   deleteComment= async(request, response, next)=> {
     try {
-      const {idPost}=request.params
-      const existPost=await Post.findById(idPost)
-      if(!existPost){
-        response.status(404).send({
-          error:'No se encontro ningun registro en la base de datos'
-        })
-      }
+      // const {idPost}=request.params
+      // const existPost=await Post.findById(idPost)
+      // if(!existPost){
+      //   response.status(404).send({
+      //     error:'No se encontro ningun registro en la base de datos'
+      //   })
+      // }
       const { id } = request.params
       const deletedComment = await Comment.findByIdAndDelete(id)
       if (!deletedComment) {
