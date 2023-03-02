@@ -26,7 +26,7 @@ export default class ExpressServer {
         next();
       }
     });
-    
+    app.use(corsMiddleware());
     app.use(bodyParser.json({ limit: process.env.REQUEST_LIMIT || '100kb' }))
     app.use(
       bodyParser.urlencoded({
@@ -38,7 +38,7 @@ export default class ExpressServer {
 
   router(routes) {
     routes(app)
-    app.use(errorHandler, corsMiddleware)
+    app.use(errorHandler)
     return this
   }
 
