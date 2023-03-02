@@ -2,6 +2,6 @@ import * as express from 'express';
 import RegisterController from '../controllers/register.controller'
 
 export default express
-  .Router('/signup')
+  .Router()
   .post('/', RegisterController.createAccount)
   
