@@ -26,7 +26,7 @@ export default class ExpressServer {
         next();
       }
     });
-    app.use(corsMiddleware());
+    app.use(corsMiddleware);
     app.use(bodyParser.json({ limit: process.env.REQUEST_LIMIT || '100kb' }))
     app.use(
       bodyParser.urlencoded({
