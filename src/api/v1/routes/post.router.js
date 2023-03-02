@@ -2,7 +2,7 @@ import * as express from 'express';
 import PostController from '../controllers/post.controller'
 
 export default express
-  .Router('/posts')
+  .Router()
   .get('/', PostController.getAllPosts)
   .post('/', PostController.createPost)
   .get('/:id', PostController.getPost)
