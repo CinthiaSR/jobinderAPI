@@ -42,12 +42,13 @@ export class PostController {
     try {
       const { id } = request.params
       const post = await Post.findById(id).populate('author', "comments")
+      const lastPosts = await Post.find(post).populate('author')
 
       if (!post) {
         return response.status(404).send({ message: 'Post not found' })
       }
 
-      response.status(200).send(post)
+      response.status(200).send(lastPosts)
     } catch (error) {
       console.error(error)
       next(error)
